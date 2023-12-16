@@ -34,6 +34,12 @@ class Communication:
     def send(self, msg: str):
         self.uart.write(msg)
         
+    def checkForMessageType(self, arguments: dict) -> str:
+        if "speed" in arguments:
+            return "control"
+        return "unknown"
+        pass
+
     def checkForCommunication(self) -> bool:
         if self.uart.any():
             return True

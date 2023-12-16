@@ -4,7 +4,7 @@ import json
 class MotorCommunication:
     
     def __init__(self):
-        self.uart = UART(1, baudrate=9600, tx=Pin(4), rx=Pin(5))
+        self.uart = UART(1, baudrate=115200, tx=Pin(4), rx=Pin(5))
         
     def initializeUart(self):
         self.uart.init(bits=8, parity=None, stop=2)
