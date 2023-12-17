@@ -26,6 +26,7 @@ class Server_Request:
     def tryResponseToJson(self):
         try:
             jsondata = self.request.json()
+            print(jsondata)
             return jsondata
         except ValueError:
             return None
@@ -36,10 +37,9 @@ class Server_Request:
         response_json = self.tryResponseToJson()
         if response_json == None:
             return None
-        json_data = json.loads(response_json)
-        if 'car' in json_data:
+        if 'car' in response_json:
             self.responseToCarStatus(json_data['car'])
-        if 'sensor' in json_data:
+        if 'sensor' in response_json:
             self.reponseToMotionSensorStatus(json_data['sensors'])
 
     def responseToCarStatus(self, json):

@@ -24,6 +24,8 @@ class Motors:
     def calculateTurnPrecentage(self, speed: int, turn_value: int):
         left_precentage = speed
         right_precentage = speed
+        if speed == 0:
+            return (left_precentage, right_precentage)
         if turn_value < 0:
             left_precentage = int(abs(turn_value)/(100/speed))
             return (left_precentage, right_precentage)
@@ -34,8 +36,15 @@ class Motors:
         if turn_value == 0:
             self.motor_placement[self.LEFT_MOTOR].move((drive_direction, speed))
             self.motor_placement[self.RIGHT_MOTOR].move((drive_direction, speed))
-            print("moved motors")
             return
+        if turn_value == -100:
+            self.motor_placement[self.LEFT_MOTOR].move((not drive_direction,
+                                                        speed))
+            self.motor_placement[self.RIGHT_MOTOR].move((drive_direction, speed))
+        if turn_value == 100:
+            self.motor_placement[self.LEFT_MOTOR].move((drive_direction,
+                                                        speed))
+            self.motor_placement[self.RIGHT_MOTOR].move((not drive_direction, speed))
         left_precentage, right_precentage = self.calculateTurnPrecentage(speed, turn_value)
         self.motor_placement[self.LEFT_MOTOR].move((drive_direction,
                                                     left_precentage))
