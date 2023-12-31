@@ -1,7 +1,7 @@
-from requestarguments import Request_Arguments
-import requests, json
-from carstatus import Car_Status
-from motionsensorreader import Motion_Sensor_Reader
+from .requestarguments import Request_Arguments
+import socket, json
+from .car.carstatus import Car_Status
+from .car.motionsensorreader import Motion_Sensor_Reader
 
 class Server_Request:
 
@@ -16,23 +16,37 @@ class Server_Request:
         self.car_status = car_status
         self.motion_sensor_reader = motion_sensor_reader
 
+    def initalizeSocket(self) -> socket.socket:
+        client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        client_socket.settimeout(self.TIMEOUT)
+        address = (self.server_url, 80)
+        try:
+            client_socket.connect(address)
+        except socket.timeout:
+            return None
+        return client_socket
 
-    def sendRequest(self, request_arguments: dict):
-        self.request = requests.post(url = self.server_url,
-                                    json = request_arguments,
-                                    timeout = self.TIMEOUT
-                                    )
+    def sendRequest(self, request_arguments: dict, is_response_needed = False) -> bool:
+        self.client_socket = self.initalizeSocket()
+        if self.client_socket == None:
+            return False
+        json_data = json.dumps(request_arguments).encode('utf-8')
+        self.client_socket.sendall(json_data)
+        if is_response_needed == False:
+            self.client_socket.close()
+        return True
 
     def tryResponseToJson(self):
         try:
-            jsondata = self.request.json()
-            print(jsondata)
+            jsondata = json.loads(self.client_socket.recv(1024).decode())
+            print(f'response = {jsondata}')
             return jsondata
-        except ValueError:
+        except ValueError as e:
+            print(e)
             return None
 
     def retrieveResponseData(self):
-        if self.request.status_code != 200:
+        if self.client_socket == None:
             return None
         response_json = self.tryResponseToJson()
         if response_json == None:
@@ -41,6 +55,7 @@ class Server_Request:
             self.responseToCarStatus(json_data['car'])
         if 'sensor' in response_json:
             self.reponseToMotionSensorStatus(json_data['sensors'])
+        self.client_socket.close()    
 
     def responseToCarStatus(self, json):
        self.car_status.updateStatus(json['speed'], json['drive_direction'],

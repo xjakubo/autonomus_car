@@ -18,6 +18,9 @@ class Car_Status:
         self.carStatus[self.DRIVE_DIRECTION] = driveDirection
         self.carStatus[self.STEER_DIRECTION] = steerDirection
 
+    def getStatus(self):
+        return self.carStatus.copy()
+    
     def getSpeed(self):
         return self.carStatus[self.SPEED]
 

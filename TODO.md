@@ -11,17 +11,17 @@ Pilot, komponenty:
 - raspberry pi zero
 
 Samochód, komponenty:
-- raspberry pi pico x2
-- raspberry pi pico w 1x
-- czujniki odległości x?
-- obudowa podwozie 
+v raspberry pi pico x2
+v raspberry pi pico w 1x
+v czujniki odległości x4
+v obudowa podwozie 
 - obudowa karoseria
-- 2 silniki 3000rpm
-- bateria 11.1v
-- stepdown 5v
-- wyświetlacz
-- sterownik do silnika 12v
-- koła 2x
+v 2 silniki 3000rpm
+v bateria 11.1v
+v stepdown 5v
+v wyświetlacz
+v sterownik do silnika 12v
+v koła 2x
 
 Samochód będzie posiadał cztery kola, dwa koła zasilane silnikiem, dwa koła stabilizujące.
 
@@ -42,19 +42,21 @@ Przyciski:
 TODO Pilota:
 - menu pilota
 - wyswietlanie tego menu pilota
-- wysyłanie requestow po wifi
 - włączanie programu podczas włączenia płytki
 - automatyczne łączenie się po wifi
 - zaprojektowanie obudowy pilota
+v wysyłanie requestow po wifi
 
 TODO Samochodu:
-- (serwer) odbieranie requestow
 - polaczenie wszystkich trzech mikrokontrolerów za pomocą UART
-- zasilenie dwóch płytek ze step down 5v
-- zaprojektowanie podwozia
 - zaprojektowanie karoserii (wyjście na wyświetlacz)
-- obsługa czujników zbliżeniowych
-- przesyłanie danych z kontrolera silnika do kontrolera wifi
-- zwracanie informacji o stanie samochodu do kontrolera wifi
 - tryb testowy
 - inwencja twórcza na wyświetlacz.
+- wysylanie danych czujnikow z wifi do pilota
+v (serwer) odbieranie requestow
+v zasilenie dwóch płytek ze step down 5v
+v zaprojektowanie podwozia
+v obsługa czujników zbliżeniowych
+v przesyłanie danych z kontrolera silnika do kontrolera wifi
+v zwracanie informacji o stanie samochodu do kontrolera wifi
+

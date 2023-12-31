@@ -1,5 +1,3 @@
-import requests
-from motionsensorreader import Motion_Sensor_Reader
 
 class Request_Arguments:
 
@@ -23,7 +21,7 @@ class Request_Arguments:
         self.requestArguments[self.DRIVE_DIRECTION] = driveDirection
 
     def changeDir(self, dirPrecentage: int):
-        if dirPrecentage not in range(-100,100):
+        if dirPrecentage not in range(-100,101):
             return
         self.requestArguments[self.STEER_DIRECTION] = dirPrecentage
 

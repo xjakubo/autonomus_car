@@ -26,7 +26,6 @@ class Server:
     def recieveRequest(self, c: tuple) -> bytes:
         conn,addr = c
         request = b''
-        conn.recv(1024) # wyrzucic header
         request += conn.recv(1024)
         return request
     
@@ -44,7 +43,7 @@ class Server:
     
     def response(self, c: tuple, resp: str):
         conn,addr = c
-        conn.send("HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n" + resp)
+        conn.send(resp)
     
     def close(self, c: tuple):
         conn,addr = c
