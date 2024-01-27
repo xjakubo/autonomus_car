@@ -14,7 +14,7 @@ from random import randint
 logging.basicConfig(level=logging.DEBUG)
 REFRESH_RATE = 30
 
-Font2 = ImageFont.truetype("Font/Font00.ttf",25)
+Font2 = ImageFont.truetype("userinterface/Font/Font00.ttf",25)
 
 class User_Interface:
 

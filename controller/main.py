@@ -3,7 +3,9 @@ from server.car.motionsensorreader import Motion_Sensor_Reader
 from server.car.carstatus import Car_Status
 from server.requestarguments import Request_Arguments
 from userinterface.userinterface import User_Interface 
+from controls.rpicontroller import Rpi_Controller
 
+controller = RPi_Controller()
 car_status = Car_Status()
 motion_sensor_reader = Motion_Sensor_Reader()
 car = Server_Request("192.168.4.1", car_status,
@@ -13,10 +15,10 @@ car.sendRequest(request_arguments= requestarguments.getRequestArguments(),
                 is_response_needed = True)
 car.retrieveResponseData()
 ui = User_Interface()
+ui.setupDisplay("Autonomus Car v0.1")
 
 
 while True:
-    controller.checkForOtherEvents()
     speed, direction, steerprecentage = controller.checkForControllerInput()
     requestarguments.changeSpeed(speed, direction)
     requestarguments.changeDir(steerprecentage)
