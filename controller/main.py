@@ -2,7 +2,7 @@ from server.serverrequest import Server_Request
 from server.car.motionsensorreader import Motion_Sensor_Reader
 from server.car.carstatus import Car_Status
 from server.requestarguments import Request_Arguments
-from .userinterface import User_Interface 
+from userinterface.userinterface import User_Interface 
 
 car_status = Car_Status()
 motion_sensor_reader = Motion_Sensor_Reader()
