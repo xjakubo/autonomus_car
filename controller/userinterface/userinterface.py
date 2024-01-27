@@ -6,7 +6,7 @@ import sys
 import time
 import logging
 import spidev as SPI
-from lib import LCD_1inch14
+from .lib import LCD_1inch14
 from PIL import Image,ImageDraw,ImageFont
 from random import randint
 
@@ -14,7 +14,7 @@ from random import randint
 logging.basicConfig(level=logging.DEBUG)
 REFRESH_RATE = 30
 
-Font2 = ImageFont.truetype("../Font/Font00.ttf",25)
+Font2 = ImageFont.truetype("Font/Font00.ttf",25)
 
 class User_Interface:
 
